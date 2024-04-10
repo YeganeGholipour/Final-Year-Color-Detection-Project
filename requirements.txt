@@ -1,0 +1,4 @@
+dynamixel-sdk==3.7.31
+numpy==1.26.4
+opencv-python==4.9.0.80
+pyserial==3.5
