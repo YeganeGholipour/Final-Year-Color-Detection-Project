@@ -66,11 +66,11 @@ class ColorDetector:
         contours_green, _ = cv2.findContours(mask_green, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         contours_red, _ = cv2.findContours(mask_red, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-        blue_contour_count = len(contours_blue)
-        green_contour_count = len(contours_green)
-        red_contour_count = len(contours_red)
+        self.blue_contour_count = len(contours_blue)
+        self.green_contour_count = len(contours_green)
+        self.red_contour_count = len(contours_red)
 
-        return (blue_contour_count, green_contour_count, red_contour_count)
+        return (self.blue_contour_count, self.green_contour_count, self.red_contour_count)
 
 
     def show_color(self):
@@ -88,7 +88,7 @@ class ColorDetector:
             color = "Red"
             cv2.putText(self.frame, color, (self.x1, self.y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
         
-        return max_contour_count
+        return color
     
     def capture(self):
         while True:
@@ -103,7 +103,7 @@ class ColorDetector:
 
             self.blue_contour_count, self.green_contour_count, self.red_contour_count = self.calculate_bounds()
 
-            _ = self.show_color()
+            color = self.show_color()
             
             cv2.imshow('Color Detection', self.frame)
         
@@ -116,5 +116,5 @@ class ColorDetector:
         cv2.destroyAllWindows()
 
 
-# detector = ColorDetector()
-# detector.capture()
+detector = ColorDetector()
+detector.capture()

@@ -44,7 +44,7 @@ DXL_STOP_POSITION_VALUE = 200
 DXL_MOVING_STATUS_THRESHOLD = 20                
 
      
-grip_goal_position = [18000, 28000]
+grip_goal_position = [18000, 26000]
 
 portHandler = PortHandler(DEVICENAME)
 
@@ -95,25 +95,26 @@ while True:
 
     # reading
     while True:
-        dxl_present_position, dxl_comm_result, dxl_error = packetHandler.read4ByteTxRx(portHandler, DXL_ID, ADDR_PRO_PRESENT_POSITION)
+        dxl_present_position, dxl_comm_result, dxl_error = packetHandler.read4ByteTxRx(portHandler, DXL_ID, ADDR_PRO_PRESENT_POSITION) 
         blue, _, _ = detector.calculate_bounds()
         max_count = detector.show_color()
         if max_count == blue:
             print('Blue object detected')
+            dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, 12, ADDR_MX_GOAL_POSITION, grip_goal_position[1])
 
-            while True:
-                dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, 12, ADDR_MX_GOAL_POSITION, grip_goal_position[1])   
-                if dxl_comm_result != COMM_SUCCESS:
-                    print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
-                elif dxl_error != 0:
-                    print("%s" % packetHandler.getRxPacketError(dxl_error))
+            # while True:
+            #     dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, 12, ADDR_MX_GOAL_POSITION, grip_goal_position[1])   
+            #     if dxl_comm_result != COMM_SUCCESS:
+            #         print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
+            #     elif dxl_error != 0:
+            #         print("%s" % packetHandler.getRxPacketError(dxl_error))
 
 
         if not abs(DXL_STOP_POSITION_VALUE - dxl_present_position) > DXL_MOVING_STATUS_THRESHOLD:
             print('The robot has reached the end point And has not found a blue object')
             break
 
-
+# Disable Dynamixel Torque
 dxl_comm_result, dxl_error = packetHandler.write1ByteTxRx(portHandler, DXL_ID, ADDR_PRO_TORQUE_ENABLE, TORQUE_DISABLE)
 if dxl_comm_result != COMM_SUCCESS:
     print("%s" % packetHandler.getTxRxResult(dxl_comm_result))
@@ -122,3 +123,6 @@ elif dxl_error != 0:
 
 
 portHandler.closePort()
+
+
+
