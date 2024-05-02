@@ -89,29 +89,32 @@ class ColorDetector:
             cv2.putText(frame, color, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
         
         return color
+
+
+# Uncomment this part to see how the detection works
+   
+# detector = ColorDetector()  
+# while True:
+#     ret, frame = detector.cap.read()
+#     if not ret:
+#         break
+
+#     roi, x1, y1 = detector.calculate_roi(frame)
+#     detector.draw_rectangle(roi, x1, y1, frame)
+#     hsv_frame = detector.transform_to_hsv(roi)
+
+#     blue_count, green_count, red_count = detector.calculate_bounds(hsv_frame)
+#     color = detector.show_color(blue_count, green_count, red_count, x1, y1, frame)
+
+#     cv2.imshow("Color Detection", frame)
+
+#     if color == "Blue":
+#         print("Detected Color is Blue")
+#     else:
+#         print("Detected Color is Not Blue")
     
-detector = ColorDetector()  
-while True:
-    ret, frame = detector.cap.read()
-    if not ret:
-        break
+#     if cv2.waitKey(1) & 0xFF == ord('q'):
+#         break
 
-    roi, x1, y1 = detector.calculate_roi(frame)
-    detector.draw_rectangle(roi, x1, y1, frame)
-    hsv_frame = detector.transform_to_hsv(roi)
-
-    blue_count, green_count, red_count = detector.calculate_bounds(hsv_frame)
-    color = detector.show_color(blue_count, green_count, red_count, x1, y1, frame)
-
-    cv2.imshow("Color Detection", frame)
-
-    if color == "Blue":
-        print("Detected Color is Blue")
-    else:
-        print("Detected Color is Not Blue")
-    
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-detector.cap.release()
-cv2.destroyAllWindows()
+# detector.cap.release()
+# cv2.destroyAllWindows()

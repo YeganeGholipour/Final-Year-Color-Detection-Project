@@ -163,7 +163,6 @@ while 1:
             while True:
                 blue, _, _ = detector.calculate_bounds()
                 max_count = detector.show_color()
-                message=s.recv(1024).decode()
                 if max_count == blue:
                     dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, 1, ADDR_MX_GOAL_POSITION, 1500)
                     dxl_comm_result, dxl_error = packetHandler.write2ByteTxRx(portHandler, 12, ADDR_MX_GOAL_POSITION, 18000)
