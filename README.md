@@ -1,7 +1,8 @@
 # Final Year Color Detection Project with Dynamixel Servo Motor Arm
 
 
-> This repository was lightly refactored post-graduation for clarity and reviewability.
+> This repository was lightly refactored post-graduation for clarity and reviewability. [A small demo is also available.](https://drive.google.com/file/d/1eblGZLh1A_bV4Z27S_dvf0vVbvUY3waq/view?usp=drive_link)
+
 
 
 ## Abstract
