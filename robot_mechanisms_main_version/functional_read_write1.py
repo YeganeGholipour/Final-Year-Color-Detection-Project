@@ -2,7 +2,7 @@ import os
 import time
 import cv2
 from dynamixel_sdk import *                    
-from color_detection_calss import ColorDetector   
+from color_detection_main_version.color_detection_calss import ColorDetector   
 
 if os.name == 'nt':
     import msvcrt

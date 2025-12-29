@@ -96,78 +96,78 @@ cv2.destroyAllWindows()
 # One Object
 # ROI is a rectangle
 
-import cv2
-import numpy as np
+# import cv2
+# import numpy as np
 
-cap = cv2.VideoCapture(0)
+# cap = cv2.VideoCapture(0)
 
-frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+# frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+# frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-rect_width = 200
-rect_height = 200
-rect_color = (255, 255, 255)
-rect_thickness = 2
+# rect_width = 200
+# rect_height = 200
+# rect_color = (255, 255, 255)
+# rect_thickness = 2
 
-x1 = int((frame_width - rect_width) / 2)
-y1 = int((frame_height - rect_height) / 2)
+# x1 = int((frame_width - rect_width) / 2)
+# y1 = int((frame_height - rect_height) / 2)
 
-while True:
-    ret, frame = cap.read()
+# while True:
+#     ret, frame = cap.read()
 
-    if not ret:
-        break
+#     if not ret:
+#         break
 
-    cv2.rectangle(frame, (x1, y1), (x1 + rect_width, y1 + rect_height), rect_color, rect_thickness)
+#     cv2.rectangle(frame, (x1, y1), (x1 + rect_width, y1 + rect_height), rect_color, rect_thickness)
 
-    roi = frame[y1: y1 + rect_height, x1:x1 + rect_width]
+#     roi = frame[y1: y1 + rect_height, x1:x1 + rect_width]
 
-    hsv_frame = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
+#     hsv_frame = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
 
-    blue_lower_bound = np.array([100, 100, 100])
-    blue_upper_bound = np.array([140, 255, 255])
+#     blue_lower_bound = np.array([100, 100, 100])
+#     blue_upper_bound = np.array([140, 255, 255])
 
-    green_lower_bound = np.array([40, 100, 100])
-    green_upper_bound = np.array([80, 255, 255])
+#     green_lower_bound = np.array([40, 100, 100])
+#     green_upper_bound = np.array([80, 255, 255])
 
-    red_lower_bound1 = np.array([0, 100, 100])
-    red_upper_bound1 = np.array([10, 255, 255])
+#     red_lower_bound1 = np.array([0, 100, 100])
+#     red_upper_bound1 = np.array([10, 255, 255])
 
-    red_lower_bound2 = np.array([160, 100, 100])
-    red_upper_bound2 = np.array([180, 255, 255])
+#     red_lower_bound2 = np.array([160, 100, 100])
+#     red_upper_bound2 = np.array([180, 255, 255])
 
-    mask_blue = cv2.inRange(hsv_frame, blue_lower_bound, blue_upper_bound)
-    mask_green = cv2.inRange(hsv_frame, green_lower_bound, green_upper_bound)
-    mask_red1 = cv2.inRange(hsv_frame, red_lower_bound1, red_upper_bound1)
-    mask_red2 = cv2.inRange(hsv_frame, red_lower_bound2, red_upper_bound2)
-    mask_red = cv2.bitwise_or(mask_red1, mask_red2)
+#     mask_blue = cv2.inRange(hsv_frame, blue_lower_bound, blue_upper_bound)
+#     mask_green = cv2.inRange(hsv_frame, green_lower_bound, green_upper_bound)
+#     mask_red1 = cv2.inRange(hsv_frame, red_lower_bound1, red_upper_bound1)
+#     mask_red2 = cv2.inRange(hsv_frame, red_lower_bound2, red_upper_bound2)
+#     mask_red = cv2.bitwise_or(mask_red1, mask_red2)
 
-    contours_blue, _ = cv2.findContours(mask_blue, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    contours_green, _ = cv2.findContours(mask_green, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    contours_red, _ = cv2.findContours(mask_red, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+#     contours_blue, _ = cv2.findContours(mask_blue, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+#     contours_green, _ = cv2.findContours(mask_green, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+#     contours_red, _ = cv2.findContours(mask_red, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-    blue_contour_count = len(contours_blue)
-    green_contour_count = len(contours_green)
-    red_contour_count = len(contours_red)
+#     blue_contour_count = len(contours_blue)
+#     green_contour_count = len(contours_green)
+#     red_contour_count = len(contours_red)
 
-    max_contour_count = max(blue_contour_count, green_contour_count, red_contour_count)
+#     max_contour_count = max(blue_contour_count, green_contour_count, red_contour_count)
 
-    if max_contour_count == blue_contour_count:
-        color = "Blue"
-        cv2.putText(frame, color, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
-    elif max_contour_count == green_contour_count:
-        color = "Green"
-        cv2.putText(frame, color, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
-    else:
-        color = "Red"
-        cv2.putText(frame, color, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+#     if max_contour_count == blue_contour_count:
+#         color = "Blue"
+#         cv2.putText(frame, color, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
+#     elif max_contour_count == green_contour_count:
+#         color = "Green"
+#         cv2.putText(frame, color, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+#     else:
+#         color = "Red"
+#         cv2.putText(frame, color, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
     
 
-    cv2.imshow('Color Detection', frame)
+#     cv2.imshow('Color Detection', frame)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+#     if cv2.waitKey(1) & 0xFF == ord('q'):
+#         break
 
-cap.release()
-cv2.destroyAllWindows()
+# cap.release()
+# cv2.destroyAllWindows()
