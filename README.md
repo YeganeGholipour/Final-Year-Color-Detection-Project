@@ -150,7 +150,7 @@ A GUI built with **Tkinter** allows:
 ---
 ### 6. Testing & Simulation
 
-- A `py.test`-based testing file simulates basic logic without hardware
+- A `test.py`-based testing file simulates basic logic without hardware
     
 - Simulation uses counters instead of physical motion
     
